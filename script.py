@@ -1,21 +1,29 @@
-import asyncio
-from TikTokApi import TikTokApi
+from tiktok_uploader.upload import upload_video
 
-async def post_video_on_tiktok(video_file_path, caption):
-    async with TikTokApi() as api:
-        # Authenticate (you may need to implement a proper authentication method)
-        await api.login(username='your_username', password='your_password')
 
-        # Upload the video
-        result = await api.upload_video(video_file_path, caption=caption)
+# Set up authentication
+cookies_list = [
+    {
+        'name': 'sessionid',
+        'value': '***REMOVED***',
+        'domain': 'https://tiktok.com',
+        'path': '/',
+        'expiry': '01/07/2025, 10:01:08 PM'
+    }
+    # the rest of your cookies all in a list
+]
 
-        if result.get('statusCode') == 0:
-            print(f"Video uploaded successfully. Video ID: {result.get('video', {}).get('id')}")
-        else:
-            print(f"Failed to upload video. Error: {result.get('statusMsg')}")
-
-# Usage
+# Video details
 video_path = 'sample.mp4'
-video_caption = 'Check out my awesome video! #fyp #viral'
+description = 'Check out this awesome video! #tiktok #viral'
+tags = ['fyp', 'foryoupage', 'trending']
 
-asyncio.run(post_video_on_tiktok(video_path, video_caption))
+# Upload the video
+upload_video(
+    video_path,
+    description=description,
+    tags=tags,
+    cookies_list=cookies_list
+)
+
+print("Video uploaded successfully!")
