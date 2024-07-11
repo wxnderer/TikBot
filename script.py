@@ -16,14 +16,14 @@ cookies_list = [
 # Video details
 video_path = 'sample.mp4'
 description = 'Check out this awesome video! #tiktok #viral'
-tags = ['fyp', 'foryoupage', 'trending']
+#tags = ['fyp', 'foryoupage', 'trending']
+cookies_file = "cookies.txt"
 
 # Upload the video
 upload_video(
     video_path,
     description=description,
-    tags=tags,
-    cookies_list=cookies_list
+    cookies=cookies_file
 )
 
 print("Video uploaded successfully!")
